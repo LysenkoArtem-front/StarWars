@@ -1,6 +1,17 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import type { RootState, AppDispatch } from './store';
+import { useSelector } from "react-redux";
+import {
+  selectCharacters,
+  selectError,
+} from "./characters/characters.selector";
+import { useEffect } from "react";
+import { fetchCharacters } from "./services/characters-api.service";
 
-// Use throughout your app instead of plain `useDispatch` and `useSelector`
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export const useCharacters = () => {
+  const characters = useSelector(selectCharacters);
+  const error = useSelector(selectError);
+  useEffect(() => {
+    fetchCharacters();
+  }, []);
+  return { characters, error };
+};
