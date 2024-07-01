@@ -9,3 +9,5 @@ export const selectCharacters = (state: RootState) =>
   selectCharactersState(state).characters;
 export const selectError = (state: RootState) =>
   selectCharactersState(state).error;
+export const selectDeepCharacter = (state: RootState) =>
+  selectCharactersState(state).deepCharacter;

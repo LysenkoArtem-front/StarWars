@@ -5,6 +5,7 @@ import { CharacterModel } from "../../models/character-model";
 const initialState: CharacterStateModel = {
   characters: [],
   error: "",
+  deepCharacter: [],
 };
 export const charactersSlice = createSlice({
   name: "characters",
@@ -17,8 +18,17 @@ export const charactersSlice = createSlice({
     fetchProductsFailureAction: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    setDeepCharacterAction: (
+      state,
+      action: PayloadAction<CharacterModel[]>
+    ) => {
+      state.deepCharacter = action.payload;
+    },
   },
 });
-export const { setCharactersAction, fetchProductsFailureAction } =
-  charactersSlice.actions;
+export const {
+  setDeepCharacterAction,
+  setCharactersAction,
+  fetchProductsFailureAction,
+} = charactersSlice.actions;
 export default charactersSlice.reducer;

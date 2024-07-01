@@ -1,7 +1,9 @@
 import { FC, memo } from "react";
 import { CharacterModel } from "../../models/character-model";
-
-export type CharactersProps = CharacterModel;
+interface CharactersCardProps {
+  onClick: () => void;
+}
+export type CharactersProps = Partial<CharacterModel & CharactersCardProps>;
 const card = {
   display: "flex",
   border: "1px solid red",
@@ -13,7 +15,12 @@ const card = {
   backgroundSize: "100% 100%",
   color: "white",
   backgroundRepeat: "no-repeat",
+  cursor: "pointer",
 };
-export const CharactersCard: FC<CharactersProps> = memo(({ name }) => {
-  return <div style={card}>{name}</div>;
+export const CharactersCard: FC<CharactersProps> = memo(({ onClick, name }) => {
+  return (
+    <div onClick={onClick} style={card}>
+      {name}
+    </div>
+  );
 });
