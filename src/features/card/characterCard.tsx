@@ -1,26 +1,52 @@
 import { FC, memo } from "react";
 import { CharacterModel } from "../../models/character-model";
-interface CharactersCardProps {
+import styles from "./character.module.css";
+
+export interface CharactersCardProps {
   onClick: () => void;
 }
 export type CharactersProps = Partial<CharacterModel & CharactersCardProps>;
-const card = {
-  display: "flex",
-  border: "1px solid red",
-  fontWeight: "500",
-  justifyContent: "center",
-  padding: "50px 0",
-  background:
-    "center url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png')",
-  backgroundSize: "100% 100%",
-  color: "white",
-  backgroundRepeat: "no-repeat",
-  cursor: "pointer",
-};
-export const CharactersCard: FC<CharactersProps> = memo(({ onClick, name }) => {
-  return (
-    <div onClick={onClick} style={card}>
-      {name}
-    </div>
-  );
-});
+export const CharactersCard: FC<CharactersProps> = memo(
+  ({ onClick, name, image }) => {
+    switch (name) {
+      case "Luke Skywalker":
+        image = "/characters/luk.webp";
+        break;
+      case "C-3PO":
+        image = "/characters/c3po.webp";
+        break;
+      case "R2-D2":
+        image = "/characters/r2d2.webp";
+        break;
+      case "Darth Vader":
+        image = "/characters/dart.webp";
+        break;
+      case "Leia Organa":
+        image = "/characters/leia.webp";
+        break;
+      case "Owen Lars":
+        image = "/characters/owen.webp";
+        break;
+      case "Beru Whitesun lars":
+        image = "/characters/beru.webp";
+        break;
+      case "R5-D4":
+        image = "/characters/r5d4.webp";
+        break;
+      case "Biggs Darklighter":
+        image = "/characters/bigs.webp";
+        break;
+      case "Obi-Wan Kenobi":
+        image = "/characters/obi.webp";
+        break;
+    }
+    return (
+      <div>
+        <div onClick={onClick} className={styles.card}>
+          <img src={image} alt={name} />
+          <p>{name}</p>
+        </div>
+      </div>
+    );
+  }
+);

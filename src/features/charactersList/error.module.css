@@ -1,0 +1,21 @@
+.errorMessage {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  height: 200px;
+  width: 500px;
+  align-items: center;
+  background-color: #000;
+  color: #feda4a;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+

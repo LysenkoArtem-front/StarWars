@@ -1,0 +1,51 @@
+.main{
+    display: flex;
+    background: url('../../../public/background/backgroundMain.webp') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 100%;
+    font-weight: 600;
+    padding: 20px;
+    letter-spacing: 6px;
+    line-height: 150%;
+    perspective: 400px;
+    text-align: justify;
+  }
+
+.mainList  {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    width: 100vw;
+  };
+  .container {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list li {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor:pointer;
+  }
+  
+  .list li:last-child {
+    border-bottom: none;
+  }
+  

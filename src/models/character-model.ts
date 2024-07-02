@@ -1,5 +1,4 @@
 export interface CharacterModel {
-  id: number;
   name: string;
   height: number;
   mass: number;
@@ -8,4 +7,5 @@ export interface CharacterModel {
   eye_color: string;
   birth_year: string;
   gender: string;
+  image: string;
 }

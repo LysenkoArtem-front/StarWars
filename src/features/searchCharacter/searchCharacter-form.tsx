@@ -1,5 +1,6 @@
 import { FC, FormEvent, memo, useCallback, useState } from "react";
 import { SearchInput } from "./searchCharacter-input";
+import styles from "./searchForm.module.css";
 type CharacterSearchFormProps = {
   onSubmit: (name: string) => void;
 };
@@ -19,7 +20,7 @@ export const CharachterSearchForm: FC<CharacterSearchFormProps> = memo(
       [onSubmit, value]
     );
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <SearchInput onChange={setValue} />
         <button type="submit">Search</button>
       </form>

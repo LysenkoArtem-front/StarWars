@@ -11,6 +11,7 @@ export const useCharacters = () => {
   const characters = useSelector(selectCharacters);
   const error = useSelector(selectError);
   const deepCharacter = useSelector(selectDeepCharacter);
+
   useEffect(() => {
     fetchCharacters();
   }, []);

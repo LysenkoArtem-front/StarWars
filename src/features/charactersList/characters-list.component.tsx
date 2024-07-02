@@ -1,19 +1,13 @@
 import { FC, useMemo, useState } from "react";
 import { CharactersCard } from "../card/characterCard";
 import { CharacterModel } from "../../models/character-model";
-import { CharactersDeepCard } from "../card/characterDeepCard";
 import { fetchDeppCharacter } from "../../app/services/charactersDepp-api-service";
 import { CharachterSearchForm } from "../searchCharacter/searchCharacter-form";
 import uuid from "react-uuid";
+import { History } from "../history/history";
+import { CharacterDeepContainer } from "../card/characterDeep-container";
+import styles from "./character-list.module.css";
 
-const deepCard = {
-  display: "flex",
-  gap: "20px",
-};
-const mainList = {
-  display: "flex",
-  gap: "20px",
-};
 interface CharacterListProps {
   characters: CharacterModel[];
   deepCharacter: CharacterModel[];
@@ -32,22 +26,32 @@ export const CharactersList: FC<CharacterListProps> = ({
       const index = characters.findIndex((el) => el.name === name.trim());
       fetchDeppCharacter(index);
       setSelectedName(name);
-      if (!namesArray.includes(name.trim())) {
-        setNamesArray([...namesArray, name]);
-      }
+      if (!namesArray.includes(name)) setNamesArray([...namesArray, name]);
     },
     [characters, namesArray]
   );
   const handleClose = () => {
     setDeepCharacter(false);
   };
-  const transformedData = useMemo(
-    () =>
-      Object.entries(deepCharacter).map(([key, value]) => ({
-        [key]: value,
-      })),
-    [deepCharacter]
-  );
+  const transformedData = useMemo(() => {
+    const noKeys = [
+      "homeworld",
+      "films",
+      "species",
+      "vehicles",
+      "starships",
+      "created",
+      "edited",
+      "url",
+    ];
+    const filteredEntries = Object.entries(deepCharacter).filter(
+      ([key]) => !noKeys.includes(key)
+    );
+    return filteredEntries.map(([key, value]) => ({
+      [key]: value,
+    }));
+  }, [deepCharacter]);
+
   const handleSubmit = (name: string) => {
     setSelectedName(name);
     handleClick(name);
@@ -55,28 +59,34 @@ export const CharactersList: FC<CharacterListProps> = ({
   return (
     <div>
       {isDeepCharacter ? (
-        transformedData.map((el) => (
-          <div style={deepCard}>
-            {" "}
-            <div>{Object.keys(el)}:</div>
-            <CharactersDeepCard
-              key={uuid()}
-              onClick={() => handleClose()}
-              {...el}
-            />
-          </div>
-        ))
+        <CharacterDeepContainer
+          onClick={() => handleClose()}
+          deepCharacter={transformedData}
+        />
       ) : (
-        <div style={mainList}>
-          <CharachterSearchForm key={uuid()} onSubmit={handleSubmit} />
-          {characters.map((el) => (
-            <CharactersCard
-              key={uuid()}
-              {...el}
-              onClick={() => handleClick(el.name)}
-            />
-          ))}
-          {selectedName && <p>{namesArray}</p>}
+        <div className={styles.main}>
+          <div className={styles.mainList}>
+            <CharachterSearchForm key={uuid()} onSubmit={handleSubmit} />
+            {characters.map((el) => (
+              <CharactersCard
+                key={uuid()}
+                {...el}
+                onClick={() => handleClick(el.name)}
+              />
+            ))}
+          </div>
+          <div className={styles.container}>
+            <div className={styles.list}>
+              {selectedName &&
+                namesArray.map((el) => (
+                  <History
+                    onClick={() => handleSubmit(el)}
+                    key={uuid()}
+                    name={el}
+                  />
+                ))}
+            </div>
+          </div>
         </div>
       )}
     </div>

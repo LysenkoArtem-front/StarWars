@@ -1,0 +1,26 @@
+.card{
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  background: url('../../../public/background/backgroundCard.webp') no-repeat center center fixed; 
+  overflow: hidden;
+  background-size: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 500px;
+  margin: auto;
+
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.5); 
+  transform: scale(1.05); 
+}
+.card img{
+  width: 150px;
+  height: 150px;
+}
